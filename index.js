@@ -5,6 +5,10 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
+app.get("/test", (req, res) => {
+  res.json({ status: "ok", hasKey: !!process.env.ANTHROPIC_API_KEY });
+});
+
 app.post("/nutrition", async (req, res) => {
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
